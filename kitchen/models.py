@@ -5,9 +5,7 @@ from django.db import models
 
 
 class Cook(AbstractUser):
-    years_of_experience = models.IntegerField(
-        validators=[MinValueValidator(0)]
-    )
+    years_of_experience = models.IntegerField(null=True, blank=True)
 
     class Meta:
         ordering = ["-years_of_experience"]
@@ -30,10 +28,13 @@ class Dish(models.Model):
     dish_type = models.ForeignKey(
         DishType,
         related_name="dishes",
-        on_delete=models.SET_NULL,
-        null=True
+        on_delete=models.CASCADE,
     )
-    cooks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="dishes")
+    cooks = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="dishes",
+        blank=True
+    )
 
     class Meta:
         verbose_name_plural = "dishes"
