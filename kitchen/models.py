@@ -17,6 +17,9 @@ class DishType(models.Model):
     class Meta:
         ordering = ["name"]
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Dish(models.Model):
     name = models.CharField(max_length=65, unique=True)
@@ -39,9 +42,15 @@ class Dish(models.Model):
     class Meta:
         verbose_name_plural = "dishes"
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=65, unique=True)
 
     class Meta:
         ordering = ["name"]
+
+    def __str__(self) -> str:
+        return self.name
