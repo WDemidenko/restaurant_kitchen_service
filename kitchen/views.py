@@ -1,5 +1,6 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -87,6 +88,17 @@ class CookUpdateView(generic.UpdateView):
 class CookDeleteView(generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen:cook-list")
+
+
+def assign_delete_cook_for_dish(request, pk):
+    dish = Dish.objects.get(id=pk)
+    cook = Cook.objects.get(id=request.user.id)
+    if cook in dish.cooks.all():
+        cook.dishes.remove(pk)
+    else:
+        cook.dishes.add(pk)
+
+    return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))
 
 
 class DishListView(generic.ListView):
