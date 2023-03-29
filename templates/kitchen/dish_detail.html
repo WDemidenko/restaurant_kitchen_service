@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ dish.name }}</h1>
+   <p>
+    <a href="{% url 'kitchen:dish-update' pk=dish.id %}" class="btn btn-primary">Update</a>
+    <a href="{% url 'kitchen:dish-delete' pk=dish.id %}" class="btn btn-danger">Delete</a>
+  </p>
+  <p>price({{ dish.price }})</p>
+  <p>{{ dish.description }}</p>
+
+  <div class="ml3">
+    <h3>Cooks</h3>
+
+    {% for cook in dish.cooks.all %}
+      <hr>
+      <p class="text-muted"><strong>Id:</strong> {{ cook.id }} </p>
+      <p>
+        Full name: {{ cook.first_name }} {{ cook.last_name }}
+      <p>
+        {% if cook.years_of_experience %}
+          experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
+        {% endif %}
+      </p>
+    {% empty %}
+      <p>No one is cooking this dish</p>
+    {% endfor %}
+  <a href="{% url 'kitchen:dish-list' %}" class="btn btn-info">back</a>
+  </div>
+{% endblock %}

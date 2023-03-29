@@ -7,9 +7,7 @@
     <ul>
       {% for dish in dish_list %}
         <li>
-          {{ dish }}
-          <a href="{% url 'kitchen:dish-update' pk=dish.id %}">Update</a>
-          <a href="{% url 'kitchen:dish-delete' pk=dish.id %}">Delete</a>
+          <a href="{% url 'kitchen:dish-detail' pk=dish.id %}">{{ dish }}</a>
         </li>
       {% endfor %}
     </ul>

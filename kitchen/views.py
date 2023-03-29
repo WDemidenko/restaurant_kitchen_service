@@ -71,6 +71,10 @@ class DishListView(generic.ListView):
     model = Dish
 
 
+class DishDetailView(generic.DetailView):
+    model = Dish
+
+
 class DishCreateView(SuccessMessageMixin, generic.CreateView):
     model = Dish
     form_class = DishForm
@@ -82,7 +86,10 @@ class DishUpdateView(SuccessMessageMixin, generic.UpdateView):
     model = Dish
     form_class = DishForm
     success_message = "%(name)s has been successfully updated"
-    success_url = reverse_lazy("kitchen:dish-list")
+
+    def get_success_url(self):
+        dish_id = self.object.id
+        return reverse_lazy('kitchen:dish-detail', kwargs={'pk': dish_id})
 
 
 class DishDeleteView(generic.DeleteView):
