@@ -5,6 +5,8 @@ from django.db import models
 
 
 class Cook(AbstractUser):
+    first_name = models.CharField(max_length=65)
+    last_name = models.CharField(max_length=65)
     years_of_experience = models.IntegerField(null=True, blank=True)
 
     class Meta:

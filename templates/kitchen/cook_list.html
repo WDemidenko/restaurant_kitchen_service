@@ -7,7 +7,10 @@
     <ul>
       {% for cook in cook_list %}
         <li>
-          {{ cook.username }}
+          {{ cook.first_name }} {{ cook.last_name }}
+          {% if cook.years_of_experience %}
+            experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
+          {% endif %} {% if user.id == cook.id %}<strong>(Me)</strong>{% endif %}
         </li>
       {% endfor %}
     </ul>
