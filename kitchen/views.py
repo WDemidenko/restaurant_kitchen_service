@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django.views import generic
 
@@ -21,7 +22,7 @@ class DishTypeListView(generic.ListView):
     model = DishType
 
 
-class DishDetailView(generic.DetailView):
+class DishTypeDetailView(generic.DetailView):
     model = DishType
 
     def get_context_data(self, **kwargs):
@@ -34,6 +35,7 @@ class DishDetailView(generic.DetailView):
 
 class CookListView(generic.ListView):
     model = Cook
+    queryset = Cook.objects.prefetch_related("dishes")
 
 
 class CookDetailView(generic.DetailView):

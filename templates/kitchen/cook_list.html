@@ -7,10 +7,13 @@
     <ul>
       {% for cook in cook_list %}
         <li>
+        <a href="{% url "kitchen:cook-detail" pk=cook.id %}">
           {{ cook.first_name }} {{ cook.last_name }}
+        </a> {% if user.id == cook.id %}<strong>(Me)</strong>{% endif %}
           {% if cook.years_of_experience %}
             experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
-          {% endif %} {% if user.id == cook.id %}<strong>(Me)</strong>{% endif %}
+          {% endif %}
+          <p>currently cooking: {{ cook.dishes.count }} dish{% if cook.dishes.count != 1 %}es{% endif %}</p>
         </li>
       {% endfor %}
     </ul>
