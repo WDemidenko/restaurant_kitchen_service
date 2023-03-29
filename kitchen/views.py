@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from kitchen.forms import DishTypeForm, DishForm
+from kitchen.forms import DishTypeForm, DishForm, CookForm
 from kitchen.models import Dish, DishType, Cook
 
 
@@ -65,6 +65,28 @@ class CookListView(generic.ListView):
 
 class CookDetailView(generic.DetailView):
     model = Cook
+
+
+class CookCreateView(generic.CreateView):
+    model = Cook
+    form_class = CookForm
+    success_message = "%(username) has been successfully created"
+    success_url = reverse_lazy("kitchen:cook-list")
+
+
+class CookUpdateView(generic.UpdateView):
+    model = Cook
+    form_class = CookForm
+    success_message = "%(username) has been successfully updated"
+
+    def get_success_url(self):
+        user_id = self.object.id
+        return reverse_lazy('kitchen:cook-detail', kwargs={'pk': user_id})
+
+
+class CookDeleteView(generic.DeleteView):
+    model = Cook
+    success_url = reverse_lazy("kitchen:cook-list")
 
 
 class DishListView(generic.ListView):
