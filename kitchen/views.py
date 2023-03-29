@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.http import HttpResponseRedirect
@@ -22,7 +23,7 @@ def index(request):
     return render(request, "kitchen/index.html", context=context)
 
 
-class DishTypeListView(generic.ListView):
+class DishTypeListView(LoginRequiredMixin, generic.ListView):
     model = DishType
     paginate_by = 5
 
@@ -44,7 +45,7 @@ class DishTypeListView(generic.ListView):
         return queryset
 
 
-class DishTypeDetailView(generic.DetailView):
+class DishTypeDetailView(LoginRequiredMixin, generic.DetailView):
     model = DishType
 
     def get_context_data(self, **kwargs):
@@ -55,14 +56,14 @@ class DishTypeDetailView(generic.DetailView):
         return context
 
 
-class DishTypeCreateView(SuccessMessageMixin, generic.CreateView):
+class DishTypeCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     model = DishType
     form_class = DishTypeForm
     success_url = reverse_lazy("kitchen:dish-type-list")
     success_message = "%(name)s has been successfully created"
 
 
-class DishTypeUpdateView(SuccessMessageMixin, generic.UpdateView):
+class DishTypeUpdateView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = DishType
     form_class = DishTypeForm
     success_message = "%(name)s has been successfully updated"
@@ -72,29 +73,29 @@ class DishTypeUpdateView(SuccessMessageMixin, generic.UpdateView):
         return reverse_lazy('kitchen:dishtype-detail', kwargs={'pk': dish_type_id})
 
 
-class DishTypeDeleteView(generic.DeleteView):
+class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = DishType
     success_url = reverse_lazy("kitchen:dish-type-list")
 
 
-class CookListView(generic.ListView):
+class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
     queryset = Cook.objects.prefetch_related("dishes")
     paginate_by = 10
 
 
-class CookDetailView(generic.DetailView):
+class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
 
 
-class CookCreateView(generic.CreateView):
+class CookCreateView(LoginRequiredMixin, generic.CreateView):
     model = Cook
     form_class = CookForm
     success_message = "%(username) has been successfully created"
     success_url = reverse_lazy("kitchen:cook-list")
 
 
-class CookUpdateView(generic.UpdateView):
+class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
     form_class = CookForm
     success_message = "%(username) has been successfully updated"
@@ -104,7 +105,7 @@ class CookUpdateView(generic.UpdateView):
         return reverse_lazy('kitchen:cook-detail', kwargs={'pk': user_id})
 
 
-class CookDeleteView(generic.DeleteView):
+class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen:cook-list")
 
@@ -120,7 +121,7 @@ def assign_delete_cook_for_dish(request, pk):
     return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))
 
 
-class DishListView(generic.ListView):
+class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
     paginate_by = 10
 
@@ -142,18 +143,18 @@ class DishListView(generic.ListView):
         return queryset
 
 
-class DishDetailView(generic.DetailView):
+class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
 
 
-class DishCreateView(SuccessMessageMixin, generic.CreateView):
+class DishCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
     model = Dish
     form_class = DishForm
     success_url = reverse_lazy("kitchen:dish-list")
     success_message = "%(name)s has been successfully created"
 
 
-class DishUpdateView(SuccessMessageMixin, generic.UpdateView):
+class DishUpdateView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView):
     model = Dish
     form_class = DishForm
     success_message = "%(name)s has been successfully updated"
@@ -163,6 +164,6 @@ class DishUpdateView(SuccessMessageMixin, generic.UpdateView):
         return reverse_lazy('kitchen:dish-detail', kwargs={'pk': dish_id})
 
 
-class DishDeleteView(generic.DeleteView):
+class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Dish
     success_url = reverse_lazy("kitchen:dish-list")

@@ -22,7 +22,7 @@
       <hr>
       <p class="text-muted"><strong>Id:</strong> {{ cook.id }} </p>
       <p>
-        Full name: {{ cook.first_name }} {{ cook.last_name }}
+        Full name: <a href="{% url 'kitchen:cook-detail' pk=cook.id %}">{{ cook.first_name }} {{ cook.last_name }}</a>
       <p>
         {% if cook.years_of_experience %}
           experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
