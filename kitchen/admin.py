@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from kitchen.models import Cook, DishType, Dish
+from kitchen.models import Cook, DishType, Dish, Ingredient
 
 admin.site.register(DishType)
+admin.site.register(Ingredient)
 
 
 @admin.register(Dish)
@@ -19,5 +20,5 @@ class CookAdmin(UserAdmin):
         ("Additional info", {'fields': ("years_of_experience",)}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ("Additional info", {"fields": ("years_of_experience", )}),
+        ("Additional info", {"fields": ("years_of_experience",)}),
     )
