@@ -23,6 +23,17 @@ class DishType(models.Model):
         return self.name
 
 
+class Ingredient(models.Model):
+    name = models.CharField(max_length=65, unique=True)
+    amount = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Dish(models.Model):
     name = models.CharField(max_length=65, unique=True)
     description = models.TextField()
@@ -40,20 +51,14 @@ class Dish(models.Model):
         related_name="dishes",
         blank=True
     )
+    ingredients = models.ManyToManyField(
+        Ingredient,
+        related_name="dishes",
+        blank=True
+    )
 
     class Meta:
         verbose_name_plural = "dishes"
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class Ingredient(models.Model):
-    name = models.CharField(max_length=65, unique=True)
-    amount = models.IntegerField(default=0)
-
-    class Meta:
-        ordering = ["name"]
 
     def __str__(self) -> str:
         return self.name

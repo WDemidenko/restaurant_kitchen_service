@@ -1,18 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ dish.name }}</h1>
+  <h1>{{ dish.name }}{% if user in dish.cooks.all %}
+    <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn-danger">Delete me from this dish</a>
+  {% else %}
+    <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn-success">Assign me to this dish</a>
+  {% endif %}
+  </h1>
    <p>
     <a href="{% url 'kitchen:dish-update' pk=dish.id %}" class="btn btn-primary">Update</a>
     <a href="{% url 'kitchen:dish-delete' pk=dish.id %}" class="btn btn-danger">Delete</a>
   </p>
   <p>price({{ dish.price }})</p>
-  <p>{{ dish.description }}</p>
-
-  {% if user in dish.cooks.all %}
-    <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn-danger">Delete me from this dish</a>
+  <p>Description - {{ dish.description }}</p>
+  <a href="{% url 'kitchen:dish-take-ingredient' pk=dish.id %}" class="btn btn-info">pick ingredients</a>
+  {% if dish.ingredients %}
+    <ul>
+      {% for ingredient in dish.ingredients.all %}
+        <li>
+          {{ ingredient.name }}
+        </li>
+      {% endfor %}
+    </ul>
   {% else %}
-    <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn-success">Assign me to this dish</a>
+    <p>There are no ingredients added to a dish</p>
   {% endif %}
 
   <div class="ml3">
@@ -31,6 +42,6 @@
     {% empty %}
       <p>No one is cooking this dish</p>
     {% endfor %}
-  <a href="{% url 'kitchen:dish-list' %}" class="btn btn-info">back</a>
+  <a href="{% url 'kitchen:dish-list' %}" class="btn btn-outline-dark">back</a>
   </div>
 {% endblock %}
