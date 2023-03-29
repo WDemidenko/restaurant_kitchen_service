@@ -36,5 +36,9 @@ class CookListView(generic.ListView):
     model = Cook
 
 
+class CookDetailView(generic.DetailView):
+    model = Cook
+
+
 class DishListView(generic.ListView):
     model = Dish
