@@ -8,11 +8,18 @@
       {% for dish in dish_list %}
         <li>
           {{ dish }}
+          <a href="{% url 'kitchen:dish-update' pk=dish.id %}">Update</a>
+          <a href="{% url 'kitchen:dish-delete' pk=dish.id %}">Delete</a>
         </li>
       {% endfor %}
     </ul>
   {% else %}
     <p>There are no dishes of this dish type</p>
   {% endif %}
+  <p>
+    <a href="{% url 'kitchen:dish-create' %}">
+      <button type="button" class="btn btn-outline-dark">Add new dish</button>
+    </a>
+  </p>
 
 {% endblock %}
