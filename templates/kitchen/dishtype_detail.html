@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ dishtype.name }}</h1>
+  <p><strong>Product range: {{ dishes_count }}</strong></p>
+
+  <div class="ml3">
+    <h3>Dishes</h3>
+
+    {% for dish in dishtype.dishes.all %}
+      <hr>
+      <p class="text-muted"><strong>Id:</strong> {{ dish.id }} </p>
+      <p>
+        name: {{ dish.name }} price: {{ dish.price }}
+      <p>{{ dish.description }}</p>
+    {% empty %}
+      <p>No dishes</p>
+    {% endfor %}
+  </div>
+{% endblock %}

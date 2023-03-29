@@ -21,6 +21,17 @@ class DishTypeListView(generic.ListView):
     model = DishType
 
 
+class DishDetailView(generic.DetailView):
+    model = DishType
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dish_type = self.object
+        dishes_count = dish_type.dishes.count()
+        context["dishes_count"] = dishes_count
+        return context
+
+
 class CookListView(generic.ListView):
     model = Cook
 
