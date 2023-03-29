@@ -24,6 +24,7 @@ def index(request):
 
 class DishTypeListView(generic.ListView):
     model = DishType
+    paginate_by = 5
 
 
 class DishTypeDetailView(generic.DetailView):
@@ -62,6 +63,7 @@ class DishTypeDeleteView(generic.DeleteView):
 class CookListView(generic.ListView):
     model = Cook
     queryset = Cook.objects.prefetch_related("dishes")
+    paginate_by = 10
 
 
 class CookDetailView(generic.DetailView):
@@ -103,6 +105,7 @@ def assign_delete_cook_for_dish(request, pk):
 
 class DishListView(generic.ListView):
     model = Dish
+    paginate_by = 10
 
 
 class DishDetailView(generic.DetailView):
