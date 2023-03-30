@@ -6,7 +6,6 @@
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
-
     <input type="submit" value="Submit" class="btn btn-primary">
   </form>
   <a href="{% url 'kitchen:dish-detail' pk=dish.id %}" class="btn-outline-info">back to details</a>

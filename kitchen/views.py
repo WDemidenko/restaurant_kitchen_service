@@ -1,7 +1,5 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -171,16 +169,15 @@ class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("kitchen:dish-list")
 
 
-class IngredientListView(generic.ListView):
+class IngredientListView(LoginRequiredMixin, SuccessMessageMixin, generic.ListView):
     model = Ingredient
     paginate_by = 10
 
 
-class DishIngredientPickView(generic.UpdateView):
+class DishIngredientPickView(LoginRequiredMixin, generic.UpdateView):
     model = Dish
     form_class = DishIngredientPickForm
     template_name = "kitchen/take_ingredients.html"
-    success_message = "You added ingredients to %(name)"
 
     def get_success_url(self):
         dish_id = self.object.id
