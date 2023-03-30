@@ -12,7 +12,15 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
   <link id="pagestyle" href="/static/assets/css/soft-design-system.css?v=1.0.1" rel="stylesheet" />
-
+  <style>
+    .center-content {
+      display: flex;
+      justify-content: center;
+    }
+    .content-width {
+      width: 70%;
+    }
+  </style>
   </head>
   <body>
 
@@ -20,8 +28,12 @@
       {% include "includes/sidebar.html" %}
     {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+    <div class="center-content">
+      <div class="content-width">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
 
     {% block pagination %}
       {% include "includes/pagination.html" %}
