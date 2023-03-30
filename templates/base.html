@@ -32,12 +32,14 @@
       <div class="content-width">
         {% block content %}
         {% endblock %}
+        {% block pagination %}
+          {% include "includes/pagination.html" %}
+        {% endblock %}
       </div>
+
     </div>
 
-    {% block pagination %}
-      {% include "includes/pagination.html" %}
-    {% endblock %}
+
 
   </body>
 </html>
