@@ -3,8 +3,8 @@
 {% block content %}
   <h1>{{ cook.first_name }} {{ cook.last_name }}</h1>
   {% if user.id == cook.id %}
-    <a href="{% url 'kitchen:cook-update' pk=cook.id %}" class="btn btn-primary">Update</a>
-    <a href="{% url 'kitchen:cook-delete' pk=cook.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'kitchen:cook-update' pk=cook.id %}" class="btn btn-outline-primary">Update</a>
+    <a href="{% url 'kitchen:cook-delete' pk=cook.id %}" class="btn btn-outline-danger">Delete</a>
   {% endif %}
   <p>
     <strong>
@@ -17,13 +17,27 @@
 
     {% for dish in cook.dishes.all %}
       <hr>
-      <p class="text-muted"><strong>Id:</strong> {{ dish.id }} </p>
+      <h4><a href="{% url 'kitchen:dish-detail' pk=dish.id %}">{{ dish.name }}</a></h4>
       <p>
-        name: <a href="{% url 'kitchen:dish-detail' pk=dish.id %}">{{ dish.name }}</a> price: {{ dish.price }}
+         price: {{ dish.price }}
       <p>{{ dish.description }}</p>
+      <a href="{% url 'kitchen:dish-take-ingredient' pk=dish.id %}" class="btn btn-info">add ingredients</a>
+      {% if dish.ingredients.all %}
+        {% for ingredient in dish.ingredients.all %}
+          <li>{{ ingredient }}</li>
+        {% endfor %}
+        {% else %}
+        <p>No ingredients</p>
+      {% endif %}
     {% empty %}
       <p>Doesn't cook anything</p>
     {% endfor %}
   </div>
+  <br>
+  <p>
+  <a href="{% url 'kitchen:cook-list' %}">
+    <button type="button" class="btn btn-outline-dark">back</button>
+  </a>
+</p>
 {% endblock %}
 

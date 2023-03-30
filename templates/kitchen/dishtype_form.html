@@ -9,4 +9,5 @@
     {{ form|crispy}}
     <input class="btn btn-success" type="submit" value="Submit">
   </form>
+  <a href="{% url 'kitchen:dishtype-detail' pk=dishtype.id %}" class="btn-outline-info">back to details</a>
 {% endblock %}
