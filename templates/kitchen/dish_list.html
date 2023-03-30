@@ -3,11 +3,11 @@
 
 {% block content %}
 
-  <h1>Dishes list</h1>
-  <form action="" method="get" class="form-check-inline">
+  <h1>Dishes</h1>
+    <form action="" method="get" class="inline">
     {% csrf_token %}
     {{ search_form|crispy }}
-    <input class="btn-outline-info" type="submit" value="🔍">
+    <button class="btn btn-outline-info" type="submit"><span>search</span></button>
   </form>
   {% if dish_list %}
     <ul>
