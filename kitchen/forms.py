@@ -15,11 +15,12 @@ class DishForm(forms.ModelForm):
     cooks = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
+        required=False
     )
 
     class Meta:
         model = Dish
-        fields = ["name", "description", "price", "dish_type", "cooks"]
+        fields = ["name", "description", "price", "dish_type"]
 
 
 class DishIngredientPickForm(forms.ModelForm):
