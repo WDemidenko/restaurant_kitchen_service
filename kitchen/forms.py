@@ -40,6 +40,12 @@ class CookForm(UserCreationForm):
         fields = ["username", "first_name", "last_name", "years_of_experience"]
 
 
+class CookUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Cook
+        fields = ["username", "first_name", "last_name", "years_of_experience"]
+
+
 class DishTypeNameSearchForm(forms.Form):
     name = forms.CharField(
         max_length=255,

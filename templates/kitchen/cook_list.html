@@ -1,33 +1,5 @@
 {% extends "base.html" %}
 
-{#{% block content %}#}
-{##}
-{#  <h1>Cooks list</h1>#}
-{#  {% if cook_list %}#}
-{#    <ul>#}
-{#      {% for cook in cook_list %}#}
-{#        <li>#}
-{#        <a href="{% url "kitchen:cook-detail" pk=cook.id %}">#}
-{#          {{ cook.first_name }} {{ cook.last_name }}#}
-{#        </a> {% if user.id == cook.id %}<strong>(Me)</strong>{% endif %}#}
-{#          {% if cook.years_of_experience %}#}
-{#            experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}#}
-{#          {% endif %}#}
-{#          <p>currently cooking: {{ cook.dishes.count }} dish{% if cook.dishes.count != 1 %}es{% endif %}</p>#}
-{#        </li>#}
-{#      {% endfor %}#}
-{#    </ul>#}
-{#  {% else %}#}
-{#    <p>There are no cooks</p>#}
-{#  {% endif %}#}
-{#  <p>#}
-{#    <a href="{% url 'kitchen:cook-create' %}">#}
-{#      <button type="button" class="btn btn-outline-dark">Add new cook</button>#}
-{#    </a>#}
-{#  </p>#}
-{##}
-{#{% endblock %}#}
-
 {% block content %}
 {% if cook_list %}
   <ul class="list-group list-group-light mx-auto">

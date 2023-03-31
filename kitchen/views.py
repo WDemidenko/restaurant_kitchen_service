@@ -11,7 +11,7 @@ from kitchen.forms import (
     CookForm,
     DishTypeNameSearchForm,
     DishNameSearchForm,
-    DishIngredientPickForm
+    DishIngredientPickForm, CookUpdateForm
 )
 from kitchen.models import Dish, DishType, Cook, Ingredient
 
@@ -103,7 +103,7 @@ class CookCreateView(LoginRequiredMixin, generic.CreateView):
 
 class CookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Cook
-    form_class = CookForm
+    form_class = CookUpdateForm
     success_message = "%(username) has been successfully updated"
 
     def get_success_url(self):
@@ -115,13 +115,9 @@ class CookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
         return self.request.user.id == cook.id
 
 
-class CookDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen:cook-list")
-
-    def test_func(self):
-        cook = self.get_object()
-        return self.request.user.id == cook.user.id
 
 
 def assign_delete_cook_for_dish(request, pk):
