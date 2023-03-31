@@ -62,7 +62,7 @@ urlpatterns = [
         name="cook-update"
     ),
     path(
-        "drivers/<int:pk>/delete/",
+        "cooks/<int:pk>/delete/",
         CookDeleteView.as_view(),
         name="cook-delete"
     ),

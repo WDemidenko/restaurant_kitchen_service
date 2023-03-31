@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -95,7 +95,7 @@ class CookCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("kitchen:cook-list")
 
 
-class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
+class CookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Cook
     form_class = CookForm
     success_message = "%(username) has been successfully updated"
@@ -104,10 +104,18 @@ class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
         user_id = self.object.id
         return reverse_lazy('kitchen:cook-detail', kwargs={'pk': user_id})
 
+    def test_func(self):
+        cook = self.get_object()
+        return self.request.user.id == cook.id
 
-class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
+
+class CookDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen:cook-list")
+
+    def test_func(self):
+        cook = self.get_object()
+        return self.request.user.id == cook.user.id
 
 
 def assign_delete_cook_for_dish(request, pk):
