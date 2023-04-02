@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
   <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -16,7 +16,7 @@
         <ul class="list-unstyled mt-3 mb-4">
           <li>Number of dish types</li>
         </ul>
-        <a href="{% url 'kitchen:dish-type-create' %}">
+        <a href="{% url "kitchen:dish-type-create" %}">
         <button href="" type="button" class="w-100 btn btn-lg btn-outline-primary">Add new</button>
         </a>
       </div>
@@ -32,7 +32,7 @@
         <ul class="list-unstyled mt-3 mb-4">
           <li>Number of dishes</li>
         </ul>
-        <a href="{% url 'kitchen:dish-create' %}">
+        <a href="{% url "kitchen:dish-create" %}">
         <button type="button" class="w-100 btn btn-lg btn-outline-primary">Add new</button>
         </a>
       </div>
@@ -48,7 +48,7 @@
         <ul class="list-unstyled mt-3 mb-4">
           <li>Number of cooks</li>
         </ul>
-        <a href="{% url 'kitchen:cook-list' %}">
+        <a href="{% url "kitchen:cook-list" %}">
         <button href="" type="button" class="w-100 btn btn-lg btn-outline-primary">Cooks list</button>
         </a>
       </div>

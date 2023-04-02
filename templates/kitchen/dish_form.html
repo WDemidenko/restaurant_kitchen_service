@@ -10,8 +10,8 @@
     <input class="btn btn-success" type="submit" value="Submit">
   </form>
   {% if object %}
-    <a href="{% url 'kitchen:dish-detail' pk=dish.id%}" class="btn-outline-info">back to details</a>
+    <a href="{% url "kitchen:dish-detail" pk=dish.id%}" class="btn-outline-info">back to details</a>
   {% else %}
-    <a href="{% url 'kitchen:dish-list'%}" class="btn-outline-info">back to list</a>
+    <a href="{% url "kitchen:dish-list"%}" class="btn-outline-info">back to list</a>
   {% endif %}
 {% endblock %}

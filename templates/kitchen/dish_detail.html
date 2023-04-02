@@ -3,12 +3,12 @@
 {% block content %}
   <h1>{{ dish.name }}</h1>
    <p>
-    <a href="{% url 'kitchen:dish-update' pk=dish.id %}" class="btn btn-outline-primary">Update</a>
-    <a href="{% url 'kitchen:dish-delete' pk=dish.id %}" class="btn btn-outline-danger">Delete</a>
+    <a href="{% url "kitchen:dish-update" pk=dish.id %}" class="btn btn-outline-primary">Update</a>
+    <a href="{% url "kitchen:dish-delete" pk=dish.id %}" class="btn btn-outline-danger">Delete</a>
   </p>
   <p>price({{ dish.price }})</p>
   <p>Description - {{ dish.description }}</p>
-  <a href="{% url 'kitchen:dish-take-ingredient' pk=dish.id %}" class="btn btn-info">add ingredients</a>
+  <a href="{% url "kitchen:dish-take-ingredient" pk=dish.id %}" class="btn btn-info">add ingredients</a>
   {% if dish.ingredients %}
     <ul>
       {% for ingredient in dish.ingredients.all %}
@@ -32,7 +32,7 @@
     {% for cook in dish.cooks.all %}
       <hr>
       <p>
-        Full name: <a href="{% url 'kitchen:cook-detail' pk=cook.id %}">{{ cook.first_name }} {{ cook.last_name }}</a>
+        Full name: <a href="{% url "kitchen:cook-detail" pk=cook.id %}">{{ cook.first_name }} {{ cook.last_name }}</a>
       <p>
         {% if cook.years_of_experience %}
           experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
@@ -41,6 +41,6 @@
     {% empty %}
       <p>No one is cooking this dish</p>
     {% endfor %}
-  <a href="{% url 'kitchen:dish-list' %}" class="btn btn-outline-dark">back</a>
+  <a href="{% url "kitchen:dish-list" %}" class="btn btn-outline-dark">back</a>
   </div>
 {% endblock %}

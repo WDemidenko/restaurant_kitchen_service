@@ -11,9 +11,9 @@
     <input type="submit" value="Submit" class="btn btn-primary">
   </form>
   {% if object %}
-    <a href="{% url 'kitchen:cook-detail' pk=cook.id %}" class="btn-outline-info">back to details</a>
+    <a href="{% url "kitchen:cook-detail" pk=cook.id %}" class="btn-outline-info">back to details</a>
   {% else %}
-    <a href="{% url 'kitchen:cook-list' %}" class="btn-outline-info">back to list</a>
+    <a href="{% url "kitchen:cook-list" %}" class="btn-outline-info">back to list</a>
   {% endif %}
 
 {% endblock %}

@@ -76,7 +76,7 @@ class DishTypeUpdateView(LoginRequiredMixin, SuccessMessageMixin, generic.Update
 
     def get_success_url(self):
         dish_type_id = self.object.id
-        return reverse_lazy('kitchen:dishtype-detail', kwargs={'pk': dish_type_id})
+        return reverse_lazy("kitchen:dishtype-detail", kwargs={"pk": dish_type_id})
 
 
 class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -108,7 +108,7 @@ class CookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
 
     def get_success_url(self):
         user_id = self.object.id
-        return reverse_lazy('kitchen:cook-detail', kwargs={'pk': user_id})
+        return reverse_lazy("kitchen:cook-detail", kwargs={"pk": user_id})
 
     def test_func(self):
         cook = self.get_object()
@@ -171,7 +171,7 @@ class DishUpdateView(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateView
 
     def get_success_url(self):
         dish_id = self.object.id
-        return reverse_lazy('kitchen:dish-detail', kwargs={'pk': dish_id})
+        return reverse_lazy("kitchen:dish-detail", kwargs={"pk": dish_id})
 
 
 class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -191,4 +191,4 @@ class DishIngredientPickView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         dish_id = self.object.id
-        return reverse_lazy('kitchen:dish-detail', kwargs={'pk': dish_id})
+        return reverse_lazy("kitchen:dish-detail", kwargs={"pk": dish_id})

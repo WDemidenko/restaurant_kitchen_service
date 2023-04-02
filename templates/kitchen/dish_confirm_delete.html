@@ -6,7 +6,7 @@
   <form action="" method="post">
     {% csrf_token %}
     <input type="submit" value="Yes" class="btn btn-outline-danger"/>
-    <a href="{% url 'kitchen:dish-detail' pk=dish.id %}" class="btn btn-outline-primary" role="button" aria-pressed="true">
+    <a href="{% url "kitchen:dish-detail" pk=dish.id %}" class="btn btn-outline-primary" role="button" aria-pressed="true">
       Back to {{ dish.name }} detail
     </a>
   </form>
