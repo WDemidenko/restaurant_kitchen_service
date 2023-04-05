@@ -24,9 +24,9 @@
   <div class="ml3">
     <h3>Cooks</h3>
     {% if user in dish.cooks.all %}
-      <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn-danger">Delete me from this dish</a>
+      <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn btn-danger">Delete me from this dish</a>
     {% else %}
-      <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn-success">Assign me to this dish</a>
+      <a href="{% url "kitchen:assign_delete_cook" pk=dish.id %}" class="btn btn-success">Assign me to this dish</a>
     {% endif %}
 
     {% for cook in dish.cooks.all %}

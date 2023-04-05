@@ -2,6 +2,7 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
+
   <br>
   <form action="" method="get" class="inline">
     {% csrf_token %}
@@ -10,17 +11,20 @@
     <button class="btn btn-outline-info" type="submit"><span>search</span></button>
   </form>
   {% if dishtype_list %}
-    <ul class="list-group list-group-light mx-auto">
+    <ul class="list-group">
       {% for dishtype in dishtype_list %}
-        <li class="list-group-item d-flex justify-content-center align-items-center">
+
+        <li class="list-group-item d-flex justify-content-center align-items-center bg-gradient-faded-light-vertical shadow-xl">
         <div style="font-size: 25px;">
           <div class="text-center">
             <div class="fw-bold">
-          <a href="{% url "kitchen:dishtype-detail" pk=dishtype.id %}">{{ dishtype.name }}</a>
+                <a href="{% url "kitchen:dishtype-detail" pk=dishtype.id %}" class="border rounded p-2">{{ dishtype.name }}</a>
+
               </div>
             </div>
           </div>
         </li>
+        <br>
       {% endfor %}
     </ul>
   {% else %}

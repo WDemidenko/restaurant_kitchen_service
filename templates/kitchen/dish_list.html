@@ -4,11 +4,22 @@
 {% block content %}
 
   <h1>Dishes</h1>
-    <form action="" method="get" class="inline">
-    {% csrf_token %}
-    {{ search_form|crispy }}
-    <button class="btn btn-outline-info" type="submit"><span>search</span></button>
-  </form>
+  <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+    <div class="mb-3 mb-md-0">
+      <form action="" method="get" class="d-flex">
+        {% csrf_token %}
+        <div class="me-3">
+          {{ search_form|crispy }}
+        </div>
+        <button class="btn btn-outline-info" type="submit"><span>Search</span></button>
+      </form>
+    </div>
+    <div>
+      <a href="{% url 'kitchen:dish-create' %}">
+        <button type="button" class="btn btn-outline-dark">Add new dish</button>
+      </a>
+    </div>
+  </div>
   {% if dish_list %}
     {% for dish in dish_list %}
   <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
@@ -38,11 +49,6 @@
   {% else %}
     <p>No dishes</p>
   {% endif %}
-  <p>
-    <a href="{% url "kitchen:dish-create" %}">
-      <button type="button" class="btn btn-outline-dark">Add new dish</button>
-    </a>
-  </p>
 
 {% endblock %}
 

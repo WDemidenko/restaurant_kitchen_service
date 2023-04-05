@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <div class="add_cook">
+  <a href="{% url "kitchen:cook-create" %}">
+    <button type="button" class="btn btn-outline-dark">Add new cook</button>
+  </a>
+  </div>
 {% if cook_list %}
   <ul class="list-group list-group-light mx-auto">
     {% for cook in cook_list %}
@@ -30,9 +35,5 @@
 {% else %}
   <p>There are no cooks</p>
 {% endif %}
-<p>
-  <a href="{% url "kitchen:cook-create" %}">
-    <button type="button" class="btn btn-outline-dark">Add new cook</button>
-  </a>
-</p>
+
 {% endblock %}
