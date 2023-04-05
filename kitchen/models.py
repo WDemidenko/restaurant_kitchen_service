@@ -25,7 +25,7 @@ class DishType(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=65, unique=True)
-    amount = models.IntegerField(default=0)
+    amount_used = models.IntegerField(default=0)
 
     class Meta:
         ordering = ["name"]

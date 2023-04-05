@@ -67,7 +67,7 @@ urlpatterns = [
         name="cook-delete"
     ),
     path(
-        "dishes/<int:pk>/assign_delete",
+        "dishes/<int:pk>/assign_delete/",
         assign_delete_cook_for_dish,
         name="assign_delete_cook"
     ),

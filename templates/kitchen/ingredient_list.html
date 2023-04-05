@@ -3,11 +3,11 @@
 
 {% block content %}
 
-  <h1>Ingredients list</h1>
+  <h1>Ingredients used</h1>
   {% if ingredient_list %}
     <ul>
       {% for ingredient in ingredient_list %}
-        <li>{{ ingredient.name }} amount - <strong>{{ ingredient.amount }}</strong></li>
+        <li>{{ ingredient.name }} amount - <strong>{{ ingredient.amount_used }}</strong></li>
       {% endfor %}
     </ul>
   {% else %}

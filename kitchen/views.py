@@ -189,6 +189,22 @@ class DishIngredientPickView(LoginRequiredMixin, generic.UpdateView):
     form_class = DishIngredientPickForm
     template_name = "kitchen/take_ingredients.html"
 
+    def form_valid(self, form):
+        dish = self.get_object()
+        old_ingredients = set(dish.ingredients.all())
+        response = super().form_valid(form)
+        new_ingredients = set(self.object.ingredients.all())
+
+        for ingredient in old_ingredients - new_ingredients:
+            ingredient.amount_used -= 1
+            ingredient.save()
+
+        for ingredient in new_ingredients - old_ingredients:
+            ingredient.amount_used += 1
+            ingredient.save()
+
+        return response
+
     def get_success_url(self):
         dish_id = self.object.id
         return reverse_lazy("kitchen:dish-detail", kwargs={"pk": dish_id})
