@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+  <h1>Ingredients used</h1>
+  {% if ingredient_list %}
+    <ul>
+      {% for ingredient in ingredient_list %}
+        <li>{{ ingredient.name }} amount - <strong>{{ ingredient.amount_used }}</strong></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no ingredients</p>
+  {% endif %}
+
+{% endblock %}

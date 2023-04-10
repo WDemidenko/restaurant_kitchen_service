@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal">Restaurant</h1>
+      <p class="fs-5 text-muted">Convenient service for interaction between cooks, adding new dishes and types of dishes</p>
+    </div>
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+  <div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+      <div class="card-header py-3 text-white bg-primary border-primary">
+        <h4 class="my-0 fw-normal">Dish types</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{ num_dishtypes }}</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Number of dish types</li>
+        </ul>
+        <a href="{% url "kitchen:dish-type-create" %}">
+        <button href="" type="button" class="w-100 btn btn-lg btn-outline-primary">Add new</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="card-header py-3 text-white bg-primary border-primary">
+        <h4 class="my-0 fw-normal">Dish</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{ num_dishes }}</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Number of dishes</li>
+        </ul>
+        <a href="{% url "kitchen:dish-create" %}">
+        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Add new</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+      <div class="card-header py-3 text-white bg-primary border-primary">
+        <h4 class="my-0 fw-normal">Cooks</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{ num_cooks }}</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Number of cooks</li>
+        </ul>
+        <a href="{% url "kitchen:cook-list" %}">
+        <button href="" type="button" class="w-100 btn btn-lg btn-outline-primary">Cooks list</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

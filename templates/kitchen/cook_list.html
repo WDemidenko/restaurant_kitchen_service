@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="add_cook">
+  <a href="{% url "kitchen:cook-create" %}">
+    <button type="button" class="btn btn-outline-dark">Add new cook</button>
+  </a>
+  </div>
+{% if cook_list %}
+  <ul class="list-group list-group-light mx-auto">
+    {% for cook in cook_list %}
+      <li class="list-group-item d-flex justify-content-center align-items-center">
+        <div style="font-size: 25px;">
+          <div class="text-center">
+            <div class="fw-bold">
+              {{ cook.first_name }} {{ cook.last_name }}
+              {% if user.id == cook.id %}<strong>(Me)</strong>{% endif %}
+
+            </div>
+            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-5 link-underline-opacity-75-hover"
+               href="{% url "kitchen:cook-detail" pk=cook.id %}">
+              <button type="button" class="btn btn-info">details</button>
+            </a>
+
+            <div class="text-muted">username: {{ cook.username }}</div>
+            {% if cook.years_of_experience %}
+              experience: {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
+            {% endif %}
+            <p class="text-white bg-gradient-faded-primary py-2 px-6 rounded">currently cooking: {{ cook.dishes.count }} dish{% if cook.dishes.count != 1 %}es{% endif %}</p>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>There are no cooks</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+  <br>
+  <form action="" method="get" class="inline">
+    {% csrf_token %}
+    {{ search_form|crispy }}
+
+    <button class="btn btn-outline-info" type="submit"><span>search</span></button>
+  <a href="{% url "kitchen:dish-type-create" %}">
+      <button type="button" class="btn btn-outline-dark">Add new dish type</button>
+    </a>
+  </form>
+  {% if dishtype_list %}
+    <ul class="list-group">
+      {% for dishtype in dishtype_list %}
+
+        <li class="list-group-item d-flex justify-content-center align-items-center bg-gradient-faded-light-vertical shadow-xl">
+        <div style="font-size: 25px;">
+          <div class="text-center">
+            <div class="fw-bold">
+                <a href="{% url "kitchen:dishtype-detail" pk=dishtype.id %}" class="border border-2 rounded p-2 px-6 bg-gradient-faded-info">{{ dishtype.name }}</a>
+
+              </div>
+            </div>
+          </div>
+        </li>
+        <br>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no dish types in kitchen yet</p>
+  {% endif %}
+  <br>
+  <p>
+
+  </p>
+
+{% endblock %}
